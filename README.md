@@ -26,7 +26,9 @@ Install above packages via this command
 
 ## Step 2 : Run the Python Script with Arguments 
 
-``python main.py --models="MLP"`` 
+``python main.py --models="MLP" --epochs=5`` 
+
+make sure to pass models and epochs as argument for smooth execution
 
 Model Options : MLP, CNN, RNN, LSTM, TCN
 

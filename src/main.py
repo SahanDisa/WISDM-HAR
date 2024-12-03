@@ -120,6 +120,7 @@ def evaluate_model(model, loader):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Model Selector")
     parser.add_argument("--model", type=str, required=True, help="Specify the model: MLP, CNN, RNN, LSTM, TCN")
+    parser.add_argument("--epochs", type=int, required=True, help="Specify the epoch count")
     args = parser.parse_args()
     
     # Load configuration for the selected model
@@ -148,31 +149,25 @@ if __name__ == "__main__":
     sequence_length=100
     device = 'cpu'
     print(f"Input Size : {input_dim} Output Size : {output_dim}")
+
+    # Model Selection
     model = run_model(args.model, input_dim, hidden_dim, output_dim, num_channels, kernel_size, dropout, sequence_length, device)
     print(summary(model))
 
-    epochs = 50
+    # Model Training
+    epochs = args.epochs
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
     model, train_losses, val_losses = train(train_loader, val_loader, epochs, device)
+    visualization.plot_train(args.model, train_losses, val_losses)
     print('Training Completed!')
 
-    visualization.plot_train(args.model, train_losses, val_losses)
-
-    # Get predictions and labels
+    # Model Evaluation
     y_true, y_pred = evaluate_model(model, test_loader)
+    visualization.plot_confusion_matrix(args.model, y_true, y_pred)
+    print('Evaluation Completed!')
 
-    # Calculate accuracy
-    accuracy = accuracy_score(y_true, y_pred)
-    print(f"Test Accuracy: {accuracy * 100:.2f}%")
+    print('=====================')
 
-    # Plot confusion matrix
-    conf_matrix = confusion_matrix(y_true, y_pred)
-    print("\nCR by library method=\n", classification_report(y_true, y_pred)) 
-    disp = ConfusionMatrixDisplay(confusion_matrix=conf_matrix, display_labels=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R'])
-    fig, ax = plt.subplots(figsize=(12,12))
-    disp.plot(ax=ax,cmap='Blues', values_format='.0f')
-    plt.title("Confusion Matrix for Test Set")
-    plt.savefig(f'confusion_matrix_{args.model}.png')
-    # plt.show()
+    
