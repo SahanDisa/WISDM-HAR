@@ -142,7 +142,7 @@ if __name__ == "__main__":
     input_dim = 3 
     hidden_dim = 64
     output_dim = len(np.unique(all_labels))
-    num_channels = [16,32,64]
+    num_channels = [16,32,64,128]
     device = 'cpu'
     print(f"Input Size : {input_dim} Output Size : {output_dim}")
     model = run_model(args.model, input_dim, hidden_dim, output_dim, num_channels, device)

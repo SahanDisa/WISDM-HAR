@@ -28,11 +28,13 @@ def get_model_config(model_name):
             "learning_rate": 0.001,
         },
         "TCN": {
-            "num_filters": 64,
+            "num_filters": [16,32,64,128],
             "kernel_size": 3,
             "num_layers": 4,
             "activation": "relu",
             "optimizer": "adam",
+            "dropout": 0.2,
+            "attention": False,
             "learning_rate": 0.001,
         },
     }
