@@ -7,8 +7,10 @@ def get_model_config(model_name):
             "learning_rate": 0.001,
         },
         "CNN": {
-            "filters": [32, 64, 128],
+            "filters": [64, 128, 256],
+            "num_layers": 3,
             "kernel_size": [3, 3],
+            "padding": [1,1],
             "activation": "relu",
             "optimizer": "adam",
             "learning_rate": 0.001,
