@@ -42,7 +42,7 @@ def run_model(model_name, input_dim, hidden_dim, output_dim, num_channels, kerne
         # Add RNN-specific code here
     elif model_name == "LSTM":
         print("Running LSTM model...")
-        model = LSTM.LSTM(input_dim, hidden_dim, output_dim)
+        model = LSTM.LSTM(input_dim, hidden_dim, output_dim, num_layers=2)
         return model
         # Add LSTM-specific code here
     elif model_name == "TCN":
