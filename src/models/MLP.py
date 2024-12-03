@@ -17,15 +17,17 @@ from tqdm import tqdm
 
 
 class MLP(nn.Module):
-    def __init__(self, input_size,sequence_length, num_classes):
+    def __init__(self, input_size, sequence_length, num_classes):
         super(MLP, self).__init__()
-        self.fc1 = nn.Linear(input_size*sequence_length, 128)
-        self.fc2 = nn.Linear(128, 64)
-        self.fc3 = nn.Linear(64, num_classes)
+        self.fc1 = nn.Linear(input_size * sequence_length, 256)
+        self.fc2 = nn.Linear(256, 128)
+        self.fc3 = nn.Linear(128, 64)
+        self.fc4 = nn.Linear(64, num_classes)
 
     def forward(self, x):
         # Flatten the input from (batch_size, 100, 3) to (batch_size, 300)
         x = x.view(x.size(0), -1)
         x = torch.relu(self.fc1(x))
         x = torch.relu(self.fc2(x))
-        return self.fc3(x)
+        x = torch.relu(self.fc3(x))
+        return self.fc4(x)

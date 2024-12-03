@@ -24,10 +24,10 @@ from utils import visualization
 
 label_encoder = LabelEncoder()
 
-def run_model(model_name, input_dim, hidden_dim, output_dim, num_channels, device):
+def run_model(model_name, input_dim, hidden_dim, output_dim, num_channels, kernel_size, dropout, sequence_length, device):
     if model_name == "MLP":
         print("Running MLP model...")
-        model = MLP.MLP(input_size=input_dim, sequence_length=100, num_classes=output_dim)
+        model = MLP.MLP(input_size=input_dim, sequence_length=sequence_length, num_classes=output_dim)
         return model
         # Add MLP-specific code here
     elif model_name == "CNN":
@@ -47,7 +47,7 @@ def run_model(model_name, input_dim, hidden_dim, output_dim, num_channels, devic
         # Add LSTM-specific code here
     elif model_name == "TCN":
         print("Running TCN model...")
-        model = TCN.TCN_HAR(input_dim, output_dim, num_channels, kernel_size=3, dropout=0.2)
+        model = TCN.TCN_HAR(input_dim, output_dim, num_channels, kernel_size=kernel_size, dropout=dropout)
         return model
         # Add TCN-specific code here
     else:
@@ -143,12 +143,15 @@ if __name__ == "__main__":
     hidden_dim = 64
     output_dim = len(np.unique(all_labels))
     num_channels = [16,32,64,128]
+    kernel_size=3
+    dropout=0.2
+    sequence_length=100
     device = 'cpu'
     print(f"Input Size : {input_dim} Output Size : {output_dim}")
-    model = run_model(args.model, input_dim, hidden_dim, output_dim, num_channels, device)
+    model = run_model(args.model, input_dim, hidden_dim, output_dim, num_channels, kernel_size, dropout, sequence_length, device)
     print(summary(model))
 
-    epochs = 1
+    epochs = 50
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=1e-3)
 

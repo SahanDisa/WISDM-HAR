@@ -1,7 +1,8 @@
 def get_model_config(model_name):
     configs = {
         "MLP": {
-            "layers": [128, 64, 32],
+            "layers": [256, 128, 64, 32],
+            "sequence_length": 100,
             "activation": "relu",
             "optimizer": "adam",
             "learning_rate": 0.001,
