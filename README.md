@@ -4,7 +4,7 @@ This project includes the final project implementation of Human Activity Recogni
 
 ## Step 1 : Clone the Repository 
 
-``git clone SahanDisa/WISDM-HAR"``
+``git clone SahanDisa/WISDM-HAR``
 
 ## Step 2 : Run the Python Script with Arguments 
 
