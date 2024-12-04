@@ -1,6 +1,6 @@
 # WISDM-HAR
 
-This project includes the final project implementation of Human Activity Recognition(HAR) using Deep Learning. Use the follow steps to setup the codebase in a local machine 
+This project includes the final project implementation of Human Activity Recognition(HAR) using Deep Learning with WISDM dataset. It has 18 human activities for 51 human subjects. More information on the dataset could find [here](https://archive.ics.uci.edu/dataset/507/wisdm+smartphone+and+smartwatch+activity+and+biometrics+dataset). Use the follow steps to setup the codebase in a local machine. 
 
 ## Packages
 
